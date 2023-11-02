@@ -18,22 +18,18 @@ app.get('/', (req, res) => {
   console.log("Hello Express!");
 });
 
-
-
-
-
 app.post('/chat', async (req, res) =>{
-  // console.log(req.body);
+  console.log(req.body);
+
   const prompt =
   getCompletePrompt(
     req.body.response_type,
     req.body.desired_role,
     req.body.skills,
-    req.body.experience,
+    req.body.work_experience,
     req.body.education,
     req.body.interests,
   )
-  console.log(prompt);
 
   try{
     const completion = await openai.chat.completions.create({
@@ -47,10 +43,6 @@ app.post('/chat', async (req, res) =>{
     res.status(500).json({ error: 'Chat request failed.' });
   }
 });
-
-
-
-
 
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
